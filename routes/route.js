@@ -1,5 +1,5 @@
 import express from "express";
-import {addUser, getUsers, updateUser} from "../controller/user-controller.js";
+import {addUser, getUsers, updateUser, getProfilePic} from "../controller/user-controller.js";
 import { newConversation, getConversation, getAllConversation } from "../controller/conversation-controller.js";
 import { newMessage, getAllMessages} from "../controller/message-controller.js";
 import { uploadFile, updateProfile } from "../controller/image-controller.js";
@@ -20,5 +20,6 @@ route.get('/conversations/getAll/:id', getAllConversation);
 
 route.post('/file/upload', upload.single("file"), uploadFile);
 route.post('/upload/:id', upload.single("file"), updateProfile);
+route.get('/profile/:Id', getProfilePic);
 
 export default route;

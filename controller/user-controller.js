@@ -42,8 +42,7 @@ export const updateUser = async (req, res)=>{
 export const getProfilePic = async(req, res)=>{
     try {   
         const user = await User.findOne({sub: req.params.Id});
-        user.picture.includes("uploads") && res.download(user.picture, user.name);
-        console.log(user.picture);
+        user && user.picture.includes("uploads") && res.download(user.picture, user.name);
     } catch (error) {
         console.error(error.message);
         res.status(500).json({ msg: error.message });

@@ -15,7 +15,7 @@ export const newConversation = async (req, res) => {
         });
 
         await newConversation.save();
-        return res.status(200).json("conversation saved successfully");
+        res.status(200).json("conversation saved successfully");
 
     } catch (err) {
         res.status(400).json(err.message);
@@ -26,8 +26,8 @@ export const getConversation = async (req, res) => {
     try {
         const { senderId, receiverId } = req.body;
         const conversation = await Conversation.findOne({ members: { $all: [senderId, receiverId] } });
-        // console.log(conversation);
-        return res.status(200).json(conversation);
+        res.status(200).json(conversation);
+
     } catch (err) {
         res.status(400).json(err.message);
     }
@@ -37,8 +37,8 @@ export const getAllConversation = async(req, res)=>{
     try {
         const id = req.params.id;
         const conversation = await Conversation.find({ userId: { $eq: id} });
-        // console.log(conversation);
-        return res.status(200).json(conversation);
+        res.status(200).json(conversation);
+
     } catch (err) {
         res.status(400).json(err.message);
     }

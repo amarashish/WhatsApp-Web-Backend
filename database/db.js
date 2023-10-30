@@ -6,8 +6,8 @@ dotenv.config();
 const userName = process.env.DB_USERNAME;
 const passWord = process.env.DB_PASSWORD;
 
-const url = `mongodb+srv://amarashish:amarraghav@cluster0.y4qchjl.mongodb.net/?retryWrites=true&w=majority`;
-// const url = `mongodb+srv://amarashish:amarraghav@cluster0.bzpol4t.mongodb.net/?retryWrites=true&w=majority`;
+// const url = `mongodb+srv://${userName}:${passWord}@cluster0.y4qchjl.mongodb.net/?retryWrites=true&w=majority`; // deployed
+const url = `mongodb+srv://${userName}:${passWord}@cluster0.bzpol4t.mongodb.net/?retryWrites=true&w=majority`; //local
 
 const Connection = async()=>{
     try{

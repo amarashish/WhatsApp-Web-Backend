@@ -12,11 +12,14 @@ const MessagesSchema = new mongoose.Schema({
     receiverId:{
         type: String
     },
-    type: {
-        type: String
-    },
     text: {
         type: String
+    },
+    file: {
+        type : String
+    },
+    size: {
+        type: Number
     }
 },
 {

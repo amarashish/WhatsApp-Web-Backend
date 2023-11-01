@@ -1,20 +1,15 @@
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
 import { Storage } from '@google-cloud/storage';
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
+import { join } from 'path';
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const serviceKey = join(__dirname, './keys.json');
+const serviceKeyPath = process.env.SERVICE_KEY_PATH || '/etc/secrets/keys.json'; 
 
 const storage = new Storage({
-  keyFilename: serviceKey,
-})
+  keyFilename: serviceKeyPath,
+});
 
 const bucket = storage.bucket(process.env.BUCKET);
 
 export default bucket;
-

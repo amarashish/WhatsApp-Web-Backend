@@ -9,7 +9,7 @@ export const newMessage = async (req, res)=>{
         await Conversation.findByIdAndUpdate(req.body.conversationId, {message: req.body.text});
         res.status(200).json("New message sent successfullt")
     }catch(err){
-        res.status(400).json(err.message);
+        res.status(400).json("Error newMessage API (beackend)", err.message);
     }
 };
 
@@ -20,12 +20,16 @@ export const getAllMessages = async (req, res)=>{
         res.status(200).json(messages);
         
     }catch(err){ 
-        res.status(400).json(err.message);
+        res.status(400).json("Error getAllMessages API (beackend)", err.message);
     }
 }
 
 
 export const uploadFile = async (req, res)=>{
-    const url = await uploadFileGCS(req.file);
-    res.status(200).json(url);
+    try{
+        const url = await uploadFileGCS(req.file);
+        res.status(200).json(url);
+    }catch(err){
+        res.status(400).json("Error uploadFile API (beackend)", err.message);
+    }
 }

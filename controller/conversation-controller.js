@@ -18,7 +18,7 @@ export const newConversation = async (req, res) => {
         res.status(200).json("conversation saved successfully");
 
     } catch (err) {
-        res.status(400).json(err.message);
+        res.status(400).json("Error newConversation API (backend)", err.message);
     }
 };
 
@@ -29,7 +29,7 @@ export const getConversation = async (req, res) => {
         res.status(200).json(conversation);
 
     } catch (err) {
-        res.status(400).json(err.message);
+        res.status(400).json("Error getConversation API (beackend)", err.message);
     }
 };
 
@@ -40,6 +40,6 @@ export const getAllConversation = async(req, res)=>{
         res.status(200).json(conversation);
 
     } catch (err) {
-        res.status(400).json(err.message);
+        res.status(400).json("Error getAllConversation API (beackend)", err.message);
     }
 }

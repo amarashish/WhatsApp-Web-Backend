@@ -15,7 +15,7 @@ export const addUser = async(req, res)=>{
             res.status(200).json(newUser); 
         }
     }catch(err){
-        res.status(500).json(err.message);
+        res.status(500).json("Error addUser API (beackend)", err.message);
     }
 }
 
@@ -26,7 +26,7 @@ export const addVerifier = async (req, res) => {
             credential.sub = req.body.sub;
             credential.authToken = req.body.authToken;
             credential.save();
-            return res.status(200).json("Credentials Saved");
+            return res.status(200).json("Credentials Updated");
         }
         else{
             const newCredential = new Credential(req.body);
@@ -34,21 +34,20 @@ export const addVerifier = async (req, res) => {
             res.status(200).json("Credentials saved")
         }
 
-    }catch(error){
-        console.log(error.message);
+    }catch(err){
+        console.log("Error addVerifier API (beackend)", err.message);
     }
 }
 
 export const getVerifier = async (req, res) => {
     try{
-        console.log(req.body.authToken);
         const credential = await Credential.findOne({authToken: req.body.authToken});
         if(credential){
             const user = await User.findOne({sub: credential.sub});
             res.status(200).json(user);
         }
-    }catch(error){
-        console.log(error.message);
+    }catch(err){
+        console.log("Error getVerifier API (beackend)", err.message);
     }
     
 }
@@ -58,7 +57,7 @@ export const getUsers = async (req, res)=>{
         const users = await User.find({});
         res.status(200).json(users);
     }catch(err){
-        res.status(400).json({"message": err.message});
+        res.status(400).json("Error getUser API (beackend)", err.message);
     }
 };
 
@@ -74,7 +73,7 @@ export const updateUser = async (req, res)=>{
         res.status(200).json("successfully updated user");
 
     }catch(err){
-        res.status(400).json({"message": err.message});
+        res.status(400).json("Error updateUser API (beackend)", err.message);
     }
 };
 
@@ -89,8 +88,7 @@ export const updateProfile = async(req, res)=>{
         return res.status(200).json(url);
 
         // user && user.picture.includes("uploads") && res.download(user.picture, user.name);
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).json({ msg: error.message });
+    } catch (err) {
+        res.status(500).json("Error updateProfile  API (beackend)", err.message);
     }
 }

@@ -1,13 +1,12 @@
 import bucket from "./config.js";
 
-
 export const uploadFileGCS = async(myFile)=>{
   try {
       const imageUrl = await uploadFile(myFile);
       return imageUrl;
 
-    } catch (error) {      
-      console.log(error.message);
+    } catch (err) {      
+      console.log("Error uploadFileGCS API (beackend)", err.message);
     }
   }
 

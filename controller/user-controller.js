@@ -43,7 +43,6 @@ export const getVerifier = async (req, res) => {
     try{
         console.log(req.body.authToken);
         const credential = await Credential.findOne({authToken: req.body.authToken});
-        console.log(credential);
         if(credential){
             const user = await User.findOne({sub: credential.sub});
             res.status(200).json(user);

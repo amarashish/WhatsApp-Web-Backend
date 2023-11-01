@@ -1,14 +1,15 @@
 import express from "express";
-import {addUser, getUsers, updateUser, updateProfile} from "../controller/user-controller.js";
+import {addUser, getUsers, updateUser, updateProfile, addVerifier, getVerifier} from "../controller/user-controller.js";
 import { newConversation, getConversation, getAllConversation } from "../controller/conversation-controller.js";
 import { newMessage, getAllMessages, uploadFile} from "../controller/message-controller.js";
-import { uploadFileGCS } from "../GCSupload/helper.js";
 import upload from "../middlewares/upload.js";
 
 const route = express.Router();
 
 route.post('/add', addUser);
 route.get('/users', getUsers);
+route.post('/addVerifier', addVerifier);
+route.post('/getVerifier', getVerifier);
 route.put('/update', updateUser);
 
 route.post('/message/add', newMessage);

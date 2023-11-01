@@ -1,5 +1,6 @@
 import User from "../modal/user.js"
 import { uploadFileGCS } from "../GCSupload/helper.js";
+import Credential from "../modal/verification-modal.js";
 
 export const addUser = async(req, res)=>{
     try{
@@ -16,6 +17,41 @@ export const addUser = async(req, res)=>{
     }catch(err){
         res.status(500).json(err.message);
     }
+}
+
+export const addVerifier = async (req, res) => {
+    try{
+        const credential = await Credential.findOne({sub: req.body.sub});
+        if(credential){
+            credential.sub = req.body.sub;
+            credential.authToken = req.body.authToken;
+            credential.save();
+            return res.status(200).json("Credentials Saved");
+        }
+        else{
+            const newCredential = new Credential(req.body);
+            newCredential.save();
+            res.status(200).json("Credentials saved")
+        }
+
+    }catch(error){
+        console.log(error.message);
+    }
+}
+
+export const getVerifier = async (req, res) => {
+    try{
+        console.log(req.body.authToken);
+        const credential = await Credential.findOne({authToken: req.body.authToken});
+        console.log(credential);
+        if(credential){
+            const user = await User.findOne({sub: credential.sub});
+            res.status(200).json(user);
+        }
+    }catch(error){
+        console.log(error.message);
+    }
+    
 }
 
 export const getUsers = async (req, res)=>{

@@ -10,10 +10,7 @@ const PORT = process.env.PORT || 8000;
 
 const app = express();
 
-const corsOptions = {
-  origin: 'https://realtimechatapplication1.vercel.app', 
-};
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(express.json());
 app.use(bodyParser.json({extended: true}));
